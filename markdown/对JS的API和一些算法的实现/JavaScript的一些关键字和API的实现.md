@@ -23,3 +23,70 @@ Function.prototype.call = function (context, ...args) {
 ```
 
 ## 实现Object.create
+```javascript
+function createObjectByPrototype(prototype) {
+    function Fun() {}
+    Fun.prototype = prototype
+    return new Fun()
+}
+```
+
+## 实现new原理
+```javascript
+function newObject(constructor, ...args) {
+    const coreObject = Object.create(constructor.prototype)
+    const constructorResult = constructor.call(result, ...args)
+    return constructorResult instanceof Object ? constructorResult : coreObject
+}
+```
+
+## 实现instanceof
+```javascript
+function myInstanceof(obj, constructor) {
+    let proto = obj.__proto__
+    let prototype = constructor.prototype
+    while(proto) {
+        if(proto === prototype) return true
+        proto = proto.__proto__
+    }
+    return false
+}
+```
+
+## 实现数组的map方法
+```javascript
+Function.prototype.map = function(callback) {
+    let result = []
+    for(let [index, value] of this.entries()) {
+        result[index] = callback(value, index, this)
+    }
+    return result
+}
+```
+
+## 实现数组reduce
+```javascript
+Function.prototype.reduce = function(callback, initValue) {
+    let startIndex = 0
+    let taget = initValue
+    if(!initValue) {
+        taget = this[0]
+        startIndex = 1
+    }
+    for(; startIndex<this.length; startIndex++) {
+        taget = callback(taget, this[startIndex], startIndex, this)
+    }
+    return taget
+}
+```
+
+## rem使用JS实现
+```javascript
+function setRem() {
+    let doc = document.documentElement;
+    let width = doc.getBoundingClientRect().width;
+    let rem = width / 75
+    doc.style.fontsize = rem + 'px';
+}
+addEventListener("resize", setRem);//这是实现响应式的关键
+```
