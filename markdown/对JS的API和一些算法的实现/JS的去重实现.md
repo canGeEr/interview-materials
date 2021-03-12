@@ -9,7 +9,7 @@ function distinct(arr) {
         for(let j=i+1; j<length; j++) {
             if(arr[j] === arr[i]) {
                 arr.splice(j, 1)
-                len--
+                length--
                 j--
             }
         }
@@ -68,12 +68,11 @@ function distinct(arr) {
     let result = [arr[0]]
     let i=1
     while(i<arr.length) {
-        arr[i] !== arr[i-1] && result.push(arr[i])
+        arr[i-1] !== arr[i] && result.push(arr[i])
         i++
     }
     return result
 }
-
 ```
 
 ## 技巧类型
