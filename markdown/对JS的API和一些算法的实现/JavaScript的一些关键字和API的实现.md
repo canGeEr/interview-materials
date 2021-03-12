@@ -2,12 +2,19 @@
 
 ## 使用setTimeout模拟setInterval
 ```javascript
+//严格模式下
 function setInterval(callback, delay) {//避免严格模式
     setTimeout(()=>{
         callback()
         setInterval()
     }, delay)
 }
+
+//非严格模式下
+setTimeout(function(){
+    //注意这里不能使用箭头函数，箭头函数无法访问arguments
+    setTimeout(arguments.callee, delay)
+}, delay)
 ```
 
 ## 实现call
@@ -24,32 +31,40 @@ Function.prototype.call = function (context, ...args) {
 
 ## 实现Object.create
 ```javascript
-function createObjectByPrototype(prototype) {
+//借助new实现
+Object.create = function(prototype, descriptors) {
     function Fun() {}
     Fun.prototype = prototype
-    return new Fun()
+    const obj = new Fun()
+    Object.defineProperties(obj, descriptors)
+    return obj
 }
 ```
 
 ## 实现new原理
 ```javascript
-function newObject(constructor, ...args) {
-    const coreObject = Object.create(constructor.prototype)
-    const constructorResult = constructor.call(result, ...args)
-    return constructorResult instanceof Object ? constructorResult : coreObject
+//借助
+{
+    new: function (constructor, ...args) {
+        const obj = Object.create(constructor.prototype)
+        const result = constructor.call(result, ...args)
+        return result instanceof Object ? result : obj
+    }
 }
 ```
 
 ## 实现instanceof
 ```javascript
-function myInstanceof(obj, constructor) {
-    let proto = obj.__proto__
-    let prototype = constructor.prototype
-    while(proto) {
-        if(proto === prototype) return true
-        proto = proto.__proto__
+{
+    instanceof: function instanceof(obj, constructor) {
+        let proto = obj.__proto__
+        let prototype = constructor.prototype
+        while(proto) {
+            if(proto === prototype) return true
+            proto = proto.__proto__
+        }
+        return false
     }
-    return false
 }
 ```
 
@@ -69,7 +84,7 @@ Function.prototype.map = function(callback) {
 Function.prototype.reduce = function(callback, initValue) {
     let startIndex = 0
     let taget = initValue
-    if(!initValue) {
+    if(initValue === undefined) {//最好不用!initValue
         taget = this[0]
         startIndex = 1
     }
