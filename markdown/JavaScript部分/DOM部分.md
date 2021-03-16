@@ -68,6 +68,6 @@ Contains 函数，确认是否包含子元素
 - W3C标准：E.preventDefault()
 - 在ie里：E.returnValue = false
 
-#### 阻止浏览器的默认行为：
+#### 阻止浏览器默认行为：
 - return false（注意JQ里面的处理函数return false，还包括阻止冒泡的功能）
 > 有意思的是，return false只有在内联绑定事件onclick="return false"才有效，对于addEventListener绑定的事件return false无效
