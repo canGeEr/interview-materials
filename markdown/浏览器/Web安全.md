@@ -8,7 +8,7 @@
 
 #### 防范：
 - 转义字符：转义输入输出的内容，对于引号、尖括号、斜杠进行转义
-- CSP白名单：明确告诉浏览器哪些外部资源可以加载和执行
+- CSP白名单：开发者明确告诉浏览器哪些外部资源可以加载和执行
     - 设置 HTTP Header 中的 Content-Security-Policy
     - 设置meta标签的方式meta http-equiv="Content-Security-Policy”
 
