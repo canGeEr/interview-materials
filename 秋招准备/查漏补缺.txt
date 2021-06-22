@@ -1,0 +1,4 @@
+nextTick原理
+jwt
+nodejs事件循环
+async和promise执行先后

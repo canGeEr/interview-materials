@@ -1,18 +1,19 @@
 ## jsonp的实现
 ```javascript
-function jsonp({url, callbackName, successFun, params}) {
-    const jsonpScript = document.createElement('script')
-    //防止首屏阻塞DOM
-    jsonpScript.async = true
-    //告知后端需要回调什么函数名
-    params.callback = callbackName
-    jsonpScript.src = serialize({url, params})
-    jsonpScript.type = 'text/javascript'
-    window[callbackName] = function(data) {
-        successFun && successFun(data)
-    }
-    //真正到页面上才会发出请求
-    document.body.appendChild(successFun)
+function jsonp({
+    url, params, callback
+}) {
+    return new Promise((fulfill, reject)=>{
+        const script = document.createElement('script')
+        script.async = true
+        script.type = 'text/javascript'
+        script.src = serialize(url, {...params, callback})
+        window[callback] = function(data) {
+            fulfill(data)
+            document.body.appendChild(script)
+        }
+        document.body.appendChild(script)
+    })
 }
 
 //反序列化
