@@ -1,22 +1,5 @@
 # JavaScript的一些关键字和API的实现
 
-## 使用setTimeout模拟setInterval
-```javascript
-//严格模式下
-function setInterval(callback, delay) {//避免严格模式
-    setTimeout(()=>{
-        callback()
-        setInterval()
-    }, delay)
-}
-
-//非严格模式下
-setTimeout(function(){
-    //注意这里不能使用箭头函数，箭头函数无法访问arguments
-    setTimeout(arguments.callee, delay)
-}, delay)
-```
-
 ## 实现call
 ```javascript
 Function.prototype.call = function (context, ...args) {
@@ -49,21 +32,6 @@ Object.create = function(prototype, descriptors) {
         const obj = Object.create(constructor.prototype)
         const result = constructor.call(result, ...args)
         return result instanceof Object ? result : obj
-    }
-}
-```
-
-## 实现instanceof
-```javascript
-{
-    instanceof: function instanceof(obj, constructor) {
-        let proto = obj.__proto__
-        let prototype = constructor.prototype
-        while(proto) {
-            if(proto === prototype) return true
-            proto = proto.__proto__
-        }
-        return false
     }
 }
 ```

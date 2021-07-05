@@ -1,6 +1,6 @@
 JS内存泄漏
-transition 作用的时机
 webSocket
 大量插入DOM优化
 React原理和Hook
-hashChange
+事件委托
+MutationObserver
