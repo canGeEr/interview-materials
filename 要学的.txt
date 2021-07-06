@@ -1,6 +1,7 @@
+MutationObserver
+模块化
+事件委托
 JS内存泄漏
 webSocket
 大量插入DOM优化
 React原理和Hook
-事件委托
-MutationObserver
