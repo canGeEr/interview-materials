@@ -1,9 +1,7 @@
-模块化
 事件委托
 迭代器、生成器
-反射、掘金关注的那个人的反射的文章
-webSocket
-大量插入DOM优化
+反射、掘金关注的那个人的反射的文章 ES6
+webSocket 
 React原理和Hook
 MutationObserver
-primitive 类型：整形、
+primitive 类型：整形
