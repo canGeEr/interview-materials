@@ -5,7 +5,7 @@ const Index = {
   setInterval(callback, spacing) {
     setTimeout(function(){
       setTimeout(arguments.callee, spacing)
-      callback()  
+      callback()
     }, spacing)
   },
   setInterval(callback, spacing) {
