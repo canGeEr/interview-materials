@@ -1,7 +1,11 @@
 事件委托
 迭代器、生成器
-反射、掘金关注的那个人的反射的文章 ES6
+反射Proxy、掘金关注的那个人的反射的文章 ES6
 webSocket 
 React原理和Hook
 MutationObserver
 primitive 类型：整形
+性能、优化的思维导图
+什么是CDN原理
+Webpack优化、TS、ESlint
+监控
